@@ -65,9 +65,9 @@ import numpy as np
 
 st.set_page_config(page_title="Real Estate Price Prediction")
 
-# Correct paths to your models
-model_df_path = "/mount/src/real-state-model/models/df.pkl"
-model_pipeline_path = "/mount/src/real-state-model/models/pipeline.pkl"
+# Paths to your models
+model_df_path = "/mnt/data/df.pkl"
+model_pipeline_path = "/mnt/data/pipeline.pkl"
 
 try:
     with open(model_df_path, 'rb') as file:
@@ -92,8 +92,8 @@ bathroom = float(st.selectbox('Number of Bathrooms', sorted(df['bathroom'].uniqu
 balcony = st.selectbox('Balconies', sorted(df['balcony'].unique().tolist()))
 property_age = st.selectbox('Property Age', sorted(df['agePossession'].unique().tolist()))
 built_up_area = float(st.number_input('Built Up Area'))
-servant_room = float(st.selectbox('Servant Room', [0.0, 1.0]))
-store_room = float(st.selectbox('Store Room', [0.0, 1.0]))
+servant_room = st.selectbox('Servant Room', [0.0, 1.0])
+store_room = st.selectbox('Store Room', [0.0, 1.0])
 furnishing_type = st.selectbox('Furnishing Type', sorted(df['furnishing_type'].unique().tolist()))
 luxury_category = st.selectbox('Luxury Category', sorted(df['luxury_category'].unique().tolist()))
 floor_category = st.selectbox('Floor Category', sorted(df['floor_category'].unique().tolist()))
@@ -107,8 +107,8 @@ if st.button('Predict'):
     
     # Predict
     try:
-        # Ensure that the columns in one_df match the expected columns in the pipeline
-        one_df = one_df[columns]
+        # Ensure the dataframe matches the expected columns in the pipeline
+        one_df = one_df.reindex(columns=pipeline.feature_names_in_, fill_value=0)
         base_price = np.expm1(pipeline.predict(one_df))[0]
         low = base_price - 0.22
         high = base_price + 0.22
