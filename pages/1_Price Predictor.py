@@ -66,8 +66,8 @@ import numpy as np
 st.set_page_config(page_title="Real Estate Price Prediction")
 
 # Paths to your models
-model_df_path = "/mnt/data/df.pkl"
-model_pipeline_path = "/mnt/data/pipeline.pkl"
+model_df_path = "/mount/src/real-state-model/models/df.pkl"
+model_pipeline_path = "/mount/src/real-state-model/models/pipeline.pkl"
 
 try:
     with open(model_df_path, 'rb') as file:
