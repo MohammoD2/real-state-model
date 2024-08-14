@@ -1,0 +1,55 @@
+stages:
+  prepare_data_v1:
+    cmd: python .\src\data\make_dataset_v1.py .\data\processed\gurgaon_properties.csv
+    deps:
+      - .\data\processed\gurgaon_properties.csv
+      - .\src\data\make_dataset_v1.py
+    outs:
+      - data/processed/gurgaon_properties_cleaned_v1.csv
+
+  prepare_data_v2:
+    cmd: python .\src\features\features_engineering_v2.py .\data\processed\gurgaon_properties_cleaned_v1.csv
+    deps:
+      - .\data\processed\gurgaon_properties_cleaned_v1.csv
+      - .\src\features\features_engineering_v2.py
+    outs:
+      - data/processed/gurgaon_properties_cleaned_v2.csv
+
+  prepare_data_v3:
+    cmd: python .\src\data\outlier.py .\data\processed\gurgaon_properties_cleaned_v2.csv
+    deps:
+      - .\data\processed\gurgaon_properties_cleaned_v2.csv
+      - .\src\data\outlier.py
+    outs:
+      - data/processed/gurgaon_properties_cleaned_final.csv
+
+  prepare_data_v4:
+    cmd: python .\src\data\missing-value-imputation.py .\data\processed\gurgaon_properties_cleaned_final.csv
+    deps:
+      - .\data\processed\gurgaon_properties_cleaned_final.csv
+      - .\src\data\missing-value-imputation.py
+    outs:
+      - data/processed/gurgaon_properties_missing_value_imputation.csv
+
+  feature_engineering:
+    cmd: python .\src\features\feature-selection.py .\data\processed\gurgaon_properties_missing_value_imputation.csv
+    deps:
+      - .\data\processed\gurgaon_properties_missing_value_imputation.csv
+      - .\src\features\feature-selection.py
+    outs:
+      - data/processed/gurgaon_properties_post_feature_selection.csv
+
+  train_model:
+    cmd: python .\src\models\train_model.py .\data\processed\gurgaon_properties_post_feature_selection.csv
+    deps:
+      - .\data\processed\gurgaon_properties_post_feature_selection.csv
+      - .\src\models\train_model.py
+    outs:
+      - models/pipeline.pkl 
+
+  visualize:
+    cmd: python .\src\visualization\data_analysis.py .\data\processed\gurgaon_properties_cleaned_v2.csv
+    deps:
+      - .\data\processed\gurgaon_properties_cleaned_v2.csv
+      - .\src\visualization\data_analysis.py
+
