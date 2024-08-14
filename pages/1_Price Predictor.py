@@ -24,7 +24,8 @@ except pickle.UnpicklingError:
 
 st.header('Enter your inputs')
 
-property_type = st.selectbox('Property Type', ['flat', 'house'])
+# Ensure that the options match the training data
+property_type = st.selectbox('Property Type', sorted(df['property_type'].unique().tolist()))
 sector = st.selectbox('Sector', sorted(df['sector'].unique().tolist()))
 bedrooms = float(st.selectbox('Number of Bedroom', sorted(df['bedRoom'].unique().tolist())))
 bathroom = float(st.selectbox('Number of Bathrooms', sorted(df['bathroom'].unique().tolist())))
@@ -40,12 +41,14 @@ floor_category = st.selectbox('Floor Category', sorted(df['floor_category'].uniq
 if st.button('Predict'):
     # Form a dataframe
     data = [[property_type, sector, bedrooms, bathroom, balcony, property_age, built_up_area, servant_room, store_room, furnishing_type, luxury_category, floor_category]]
-    columns = ['property_type', 'sector', 'bedRoom', 'bathroom', 'balcony', 'agePossession', 'built_up_area', 'servant room', 'store room', 'furnishing_type', 'luxury_category', 'floor_category']
+    columns = ['property_type', 'sector', 'bedRoom', 'bathroom', 'balcony', 'agePossession', 'built_up_area', 'servant_room', 'store_room', 'furnishing_type', 'luxury_category', 'floor_category']
     
     one_df = pd.DataFrame(data, columns=columns)
     
     # Predict
     try:
+        # Ensure that the columns in one_df match the expected columns in the pipeline
+        one_df = one_df[columns]
         base_price = np.expm1(pipeline.predict(one_df))[0]
         low = base_price - 0.22
         high = base_price + 0.22
