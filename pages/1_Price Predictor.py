@@ -5,14 +5,24 @@ import numpy as np
 
 st.set_page_config(page_title="Analysis Model")
 
+file_paths = {
+    "df": "/mount/src/real-state-model/models/df.pkl",
+    "pipeline": "/mount/src/real-state-model/models/pipeline.pkl"
+}
 
+def load_pickle(file_path):
+    try:
+        with open(file_path, 'rb') as file:
+            return pickle.load(file)
+    except Exception as e:
+        st.error(f"Error loading {file_path}: {e}")
+        return None
 
-with open("/mount/src/real-state-model/models/df.pkl",'rb') as file:
-    df = pickle.load(file)
+df = load_pickle(file_paths["df"])
+pipeline = load_pickle(file_paths["pipeline"])
 
-with open("/mount/src/real-state-model/models/pipeline.pkl",'rb') as file:
-    pipeline = pickle.load(file)
-
+if df is None or pipeline is None:
+    st.stop() 
 
 st.header('Enter your inputs')
 
