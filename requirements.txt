@@ -9,3 +9,4 @@ setuptools==67.1.0
 wheel==0.41.2
 streamlit==0.89.0
 distutils
+setuptools
