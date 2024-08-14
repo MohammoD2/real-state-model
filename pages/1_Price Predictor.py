@@ -7,10 +7,10 @@ st.set_page_config(page_title="Analysis Model")
 
 
 
-with open("models\df.pkl",'rb') as file:
+with open("/mount/src/real-state-model/models/df.pkl",'rb') as file:
     df = pickle.load(file)
 
-with open("models\pipeline.pkl",'rb') as file:
+with open("/mount/src/real-state-model/models/pipeline.pkl",'rb') as file:
     pipeline = pickle.load(file)
 
 
