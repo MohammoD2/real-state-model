@@ -39,7 +39,7 @@ luxury_category = st.selectbox('Luxury Category', sorted(df['luxury_category'].u
 floor_category = st.selectbox('Floor Category', sorted(df['floor_category'].unique().tolist()))
 
 if st.button('Predict'):
-    # Form a dataframe
+    # Form a dataframe with correct column names
     data = [[property_type, sector, bedrooms, bathroom, balcony, property_age, built_up_area, servant_room, store_room, furnishing_type, luxury_category, floor_category]]
     columns = ['property_type', 'sector', 'bedRoom', 'bathroom', 'balcony', 'agePossession', 'built_up_area', 'servant_room', 'store_room', 'furnishing_type', 'luxury_category', 'floor_category']
     
