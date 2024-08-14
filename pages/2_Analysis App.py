@@ -11,9 +11,9 @@ st.set_page_config(page_title="Plotting Demo")
 
 st.title('Analytics')
 
-new_df = pd.read_csv("data\raw\data_viz1.csv")
+new_df = pd.read_csv("/mount/src/real-state-model/data/raw/data_viz1.csv")
 # feature_text = pickle.load(open("E:\\Work files\\Real_state\\Real state\\datasets\\feature_text.pkl", 'rb'))
-with open("data\raw\feature_text.pkl", 'rb') as file:
+with open("/mount/src/real-state-model/data/raw/feature_text.pkl", 'rb') as file:
     feature_text = pickle.load(file)
 
 # Ensure that only numeric columns are selected for aggregation
