@@ -3,14 +3,14 @@ import pickle
 import pandas as pd
 import numpy as np
 
-st.set_page_config(page_title="Viz Demo")
+st.set_page_config(page_title="Analysis Model")
 
 
 
-with open(r"E:\Work files\Real_state\models\df.pkl",'rb') as file:
+with open("models\df.pkl",'rb') as file:
     df = pickle.load(file)
 
-with open(r"E:\Work files\Real_state\models\pipeline.pkl",'rb') as file:
+with open("models\pipeline.pkl",'rb') as file:
     pipeline = pickle.load(file)
 
 
