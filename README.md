@@ -1,7 +1,7 @@
 
 Certainly! Here’s a comprehensive description for your GitHub repository, based on your project:
 
-Gurgaon Real Estate Price Prediction Project
+Gurgaon Real Estate Project
 ==============================
 
 This repository contains an elaborate machine learning workflow for predicting the prices of real estate in Gurgaon, India. The project employs modern data preprocessing, feature engineering and a Random Forest regressor model for correct price predictions. It is an end-to-end pipeline which aims at MLOps compatibility and it also uses DVC for effective version control of data and models.This repository contains an elaborate machine learning workflow for predicting the prices of real estate in Gurgaon, India. The project employs modern data preprocessing, feature engineering and a Random Forest regressor model for correct price predictions. It is an end-to-end pipeline which aims at MLOps compatibility and it also uses DVC for effective version control of data and models.
